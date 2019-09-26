@@ -1,5 +1,5 @@
 import {readFileSync} from 'fs'
-import {process} from '../../main/ts'
+import {matchSnapshot} from '../../main/ts'
 
 describe('process', () => {
   const target = 'src/test/snapshots/foo.json'
@@ -17,7 +17,7 @@ describe('process', () => {
     3:7   error  'name' is already defined                                                 no-redeclare`
 
   it('updates snapshot data with new stdout', async() => {
-    const result = await process({
+    const result = await matchSnapshot({
       cmd,
       target,
       update: true,
@@ -31,7 +31,7 @@ describe('process', () => {
   })
 
   it('return true if new snapshot matches to the previous', async() => {
-    const result = await process({
+    const result = await matchSnapshot({
       cmd,
       target,
       cmdOpts: {cwd: dirname},
@@ -41,7 +41,7 @@ describe('process', () => {
   })
 
   it('return false otherwise', async() => {
-    const result = await process({
+    const result = await matchSnapshot({
       cmd: 'echo baz quux',
       target,
       cmdOpts: {cwd: dirname},

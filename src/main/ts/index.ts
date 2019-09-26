@@ -105,7 +105,7 @@ export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._o
   }
 }
 
-export const process = async(opts: IOpts): Promise<boolean> => {
+export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
   const _opts: IOpts = {...DEFAULT_OPTS, ...opts}
   const {target, update} = _opts
   const snapshot: ISnapshot = await getExecSnapshot(_opts).then(normalizeSnapshot)
