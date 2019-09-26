@@ -9,15 +9,15 @@ npm add stdstream-snapshot -D
 
 ## Usage
 ```javascript
-import {match} from 'stdstream-snapshot'
+import {process} from 'stdstream-snapshot'
 
 it('cmd output matches to spapshot', () => {
   const cmd = 'somecmd --flag=foo -b'
-  const path = './test/snapshots/some-cmd-output.json'  
+  const target = './test/snapshots/some-cmd-output.json'  
   
-  expect(match({
+  expect(process({
     cmd,
-    path,
+    target,
     update: true
   })).toBeTruthy()
 })

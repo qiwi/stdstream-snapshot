@@ -15,8 +15,6 @@ export type IOpts = {
   [key: string]: any
 }
 
-
-
 export type ISnapshot = {
   stdout: string,
   stderr: string,

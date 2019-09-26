@@ -16,6 +16,6 @@ export const relatify: IStringHandler = (out: string, dirname: string) => {
 
 export const fixEncoding: IStringHandler = (out: string) => out.replace(/\[\d*m?/g, '')
 
-export const trim: IStringHandler  = (str: string) => str.trim()
+export const trim: IStringHandler = (str: string) => str.trim()
 
 export const tabsToSpaces: IStringHandler = (str: string) => str.replace(/\t/gi, '  ')

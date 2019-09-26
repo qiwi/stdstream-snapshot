@@ -6,7 +6,7 @@ import {
   trim,
   tabsToSpaces,
   relatify,
-  fixEncoding
+  fixEncoding,
 } from './handler'
 
 import {
@@ -14,7 +14,7 @@ import {
   IOpts,
   ICmdOpts,
   ISnapshot,
-  IStringHandler
+  IStringHandler,
 } from './interface'
 
 export const DEFAULT_OPTS = {
@@ -28,28 +28,30 @@ export const DEFAULT_CMD_OPTS: ICmdOpts = {cwd: __dirname}
 
 export const processCmdOpts = (opts: ICmdOpts = {}): ICmdOpts => ({...DEFAULT_CMD_OPTS, opts})
 
-export const getExecSnapshot = async (opts: IOpts): Promise<ISnapshot> => new Promise((resolve, reject) => {
+export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Promise((resolve, reject) => {
   const {cmd, cmdOpts} = opts
   const _cmdOpts = processCmdOpts(cmdOpts)
 
   exec(cmd, _cmdOpts, (err, stdout: string, stderr: string) => {
     if (err) {
       reject(err)
-    } else {
+    }
+    else {
       resolve({
         stdout,
         stderr,
-        opts
+        opts,
       })
     }
   })
 })
 
-export const getSnapshot = async (filePath: string): Promise<ISnapshot> => new Promise((resolve, reject) => {
+export const getSnapshot = async(filePath: string): Promise<ISnapshot> => new Promise((resolve, reject) => {
   readFile(filePath, 'utf8', (err, result) => {
     if (err) {
       reject(err)
-    } else {
+    }
+    else {
       resolve(JSON.parse(result) as ISnapshot)
     }
   })
@@ -61,7 +63,8 @@ export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<a
   writeFile(filePath, text, (err) => {
     if (err) {
       reject(err)
-    } else {
+    }
+    else {
       resolve(text)
     }
   })
@@ -73,10 +76,10 @@ export const normalizeSnapshot = (snapshot: ISnapshot): ISnapshot => {
     normalizePaths: relatify,
     normalizeEncoding: fixEncoding,
     normalizeSpaces: tabsToSpaces,
-    trim: trim
+    trim,
   }
   const handlerOptsMap: IAnyMap = {
-    normalizePaths: [get(opts, 'cmdOpts.cwd')]
+    normalizePaths: [get(opts, 'cmdOpts.cwd')],
   }
 
   return Object.keys(opts).reduce((m: ISnapshot, k: string) => {
@@ -94,11 +97,11 @@ export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._o
   return {
     stderr: handler(stderr, ..._opts),
     stdout: handler(stdout, ..._opts),
-    opts
+    opts,
   }
 }
 
-export const process =  async (opts: IOpts): Promise<boolean> => {
+export const process = async(opts: IOpts): Promise<boolean> => {
   const _opts: IOpts = {...DEFAULT_OPTS, ...opts}
   const {target, update} = _opts
   const snapshot: ISnapshot = await getExecSnapshot(_opts).then(normalizeSnapshot)

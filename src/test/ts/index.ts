@@ -7,7 +7,7 @@ describe('process', () => {
   const stdout = `
 \t${dirname}/rules/some-rules.ts
 \t\t2:7   error  'name' is assigned a value but never used                                 no-unused-vars
-\t\t3:7   error  'name' is already defined                                                 no-redeclare  
+\t\t3:7   error  'name' is already defined                                                 no-redeclare
 
 
 `
@@ -16,32 +16,32 @@ describe('process', () => {
     2:7   error  'name' is assigned a value but never used                                 no-unused-vars
     3:7   error  'name' is already defined                                                 no-redeclare`
 
-  it('updates snapshot data with new stdout', async () => {
+  it('updates snapshot data with new stdout', async() => {
     const result = await process({
       cmd,
       target,
       update: true,
-      cmdOpts: { cwd: dirname},
+      cmdOpts: {cwd: dirname},
     })
     expect(result).toBeTruthy()
     expect(JSON.parse(readFileSync(target, 'utf-8')).stdout).toBe(normalizedStdout)
   })
 
-  it('return true if new snapshot matches to the previous', async () => {
+  it('return true if new snapshot matches to the previous', async() => {
     const result = await process({
       cmd,
       target,
-      cmdOpts: { cwd: dirname},
+      cmdOpts: {cwd: dirname},
     })
 
     expect(result).toBeTruthy()
   })
 
-  it('return false otherwise', async () => {
+  it('return false otherwise', async() => {
     const result = await process({
       cmd: 'echo baz quux',
       target,
-      cmdOpts: { cwd: dirname},
+      cmdOpts: {cwd: dirname},
     })
 
     expect(result).toBeFalsy()

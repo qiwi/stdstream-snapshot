@@ -3,7 +3,7 @@ import {
   // relatify,
   // fixEncoding,
   tabsToSpaces,
-  trim
+  trim,
 } from '../../main/ts/handler'
 
 describe('stringHandlers', () => {
@@ -28,7 +28,4 @@ describe('stringHandlers', () => {
 
     expect(relatify(str, dirname)).toBe(expected)
   })
-
-
 })
-
