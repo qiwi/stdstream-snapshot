@@ -1,7 +1,49 @@
-import index from '../../main/ts'
+import {readFileSync} from 'fs'
+import {process} from '../../main/ts'
 
-describe('', () => {
-  it('', () => {
-    expect(!!index).toBeTruthy()
+describe('process', () => {
+  const target = 'src/test/snapshots/foo.json'
+  const dirname = __dirname
+  const stdout = `
+\t${dirname}/rules/some-rules.ts
+\t\t2:7   error  'name' is assigned a value but never used                                 no-unused-vars
+\t\t3:7   error  'name' is already defined                                                 no-redeclare  
+
+
+`
+  const cmd = `echo "${stdout}"`
+  const normalizedStdout = `/rules/some-rules.ts
+    2:7   error  'name' is assigned a value but never used                                 no-unused-vars
+    3:7   error  'name' is already defined                                                 no-redeclare`
+
+  it('updates snapshot data with new stdout', async () => {
+    const result = await process({
+      cmd,
+      target,
+      update: true,
+      cmdOpts: { cwd: dirname},
+    })
+    expect(result).toBeTruthy()
+    expect(JSON.parse(readFileSync(target, 'utf-8')).stdout).toBe(normalizedStdout)
+  })
+
+  it('return true if new snapshot matches to the previous', async () => {
+    const result = await process({
+      cmd,
+      target,
+      cmdOpts: { cwd: dirname},
+    })
+
+    expect(result).toBeTruthy()
+  })
+
+  it('return false otherwise', async () => {
+    const result = await process({
+      cmd: 'echo baz quux',
+      target,
+      cmdOpts: { cwd: dirname},
+    })
+
+    expect(result).toBeFalsy()
   })
 })
