@@ -76,6 +76,23 @@
     "typescript": "^3.6.3",
     "typescript-eslint-parser": "^22.0.0"
   },
+  "release": {
+    "branch": "master",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qiwi/stdstream-snapshot.git"
