@@ -1,7 +1,8 @@
 {
   "name": "stdstream-snapshot",
   "version": "0.0.0",
-  "description": ".....",
+  "private": false,
+  "description": "Util for CLI testing: fetch stdout, stderr streams and match data to snapshot",
   "source": "src/main/ts/index.ts",
   "main": "target/bundle/stdstream-snapshot.js",
   "module": "target/bundle/stdstream-snapshot.mjs",
