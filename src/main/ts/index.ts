@@ -15,6 +15,7 @@ import {
   ICmdOpts,
   ISnapshot,
   IStringHandler,
+  IErr,
 } from './interface'
 
 export const DEFAULT_OPTS = {
@@ -28,21 +29,23 @@ export const DEFAULT_CMD_OPTS: ICmdOpts = {cwd: __dirname}
 
 export const processCmdOpts = (opts: ICmdOpts = {}): ICmdOpts => ({...DEFAULT_CMD_OPTS, opts})
 
-export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Promise((resolve, reject) => {
+export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Promise((resolve) => {
   const {cmd, cmdOpts} = opts
   const _cmdOpts = processCmdOpts(cmdOpts)
 
-  exec(cmd, _cmdOpts, (err, stdout: string, stderr: string) => {
-    if (err) {
-      reject(err)
+  exec(cmd, _cmdOpts, (_err, stdout: string, stderr: string) => {
+    const err: IErr = {
+      signal: null,
+      code: 0,
+      killed: false,
+      ..._err,
     }
-    else {
-      resolve({
-        stdout,
-        stderr,
-        opts,
-      })
-    }
+    resolve({
+      stdout,
+      stderr,
+      opts,
+      err,
+    })
   })
 })
 
@@ -92,12 +95,13 @@ export const normalizeSnapshot = (snapshot: ISnapshot): ISnapshot => {
 }
 
 export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._opts: any[]) => {
-  const {stdout, stderr, opts} = snapshot
+  const {stdout, stderr, opts, err} = snapshot
 
   return {
     stderr: handler(stderr, ..._opts),
     stdout: handler(stdout, ..._opts),
     opts,
+    err,
   }
 }
 

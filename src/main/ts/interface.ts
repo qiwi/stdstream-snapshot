@@ -15,10 +15,17 @@ export type IOpts = {
   [key: string]: any
 }
 
+export type IErr = {
+  killed: boolean,
+  code: number,
+  signal: any
+}
+
 export type ISnapshot = {
   stdout: string,
   stderr: string,
-  opts: IOpts
+  opts: IOpts,
+  err: IErr
 }
 
 export type IStringHandler = (v: string, ...args: any[]) => string
