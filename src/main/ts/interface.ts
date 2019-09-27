@@ -24,7 +24,6 @@ export type IErr = {
 export type ISnapshot = {
   stdout: string,
   stderr: string,
-  opts: IOpts,
   err: IErr
 }
 

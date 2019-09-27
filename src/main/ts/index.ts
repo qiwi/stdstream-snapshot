@@ -1,7 +1,7 @@
 // TODO use execa
-import {exec} from 'child_process'
+import {exec, ExecException} from 'child_process'
 import {writeFile, readFile} from 'fs'
-import {identity, get} from './util'
+import {identity, get, pick} from './util'
 import {
   trim,
   tabsToSpaces,
@@ -31,19 +31,21 @@ export const processCmdOpts = (opts: ICmdOpts = {}): ICmdOpts => ({...DEFAULT_CM
 
 export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Promise((resolve) => {
   const {cmd, cmdOpts} = opts
-  const _cmdOpts = processCmdOpts(cmdOpts)
+  const _cmdOpts: any = processCmdOpts(cmdOpts)
 
-  exec(cmd, _cmdOpts, (_err, stdout: string, stderr: string) => {
+  exec(cmd, _cmdOpts, (_err: ExecException | null, _stdout: string | Buffer, _stderr: string | Buffer) => {
+    const stdout = _stdout + ''
+    const stderr = _stderr + ''
     const err: IErr = {
       signal: null,
       code: 0,
       killed: false,
-      ..._err,
+      ...pick(_err, 'signal', 'code', 'killed'),
     }
+
     resolve({
       stdout,
       stderr,
-      opts,
       err,
     })
   })
@@ -73,8 +75,8 @@ export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<a
   })
 })
 
-export const normalizeSnapshot = (snapshot: ISnapshot): ISnapshot => {
-  const opts: IOpts = snapshot.opts
+export const normalizeSnapshot = (snapshot: ISnapshot, opts: IOpts): ISnapshot => {
+  // const opts: IOpts = snapshot.opts
   const handlerMap: {[key: string]: IStringHandler} = {
     normalizePaths: relatify,
     normalizeEncoding: fixEncoding,
@@ -95,12 +97,11 @@ export const normalizeSnapshot = (snapshot: ISnapshot): ISnapshot => {
 }
 
 export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._opts: any[]) => {
-  const {stdout, stderr, opts, err} = snapshot
+  const {stdout, stderr, err} = snapshot
 
   return {
     stderr: handler(stderr, ..._opts),
     stdout: handler(stdout, ..._opts),
-    opts,
     err,
   }
 }
@@ -108,7 +109,8 @@ export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._o
 export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
   const _opts: IOpts = {...DEFAULT_OPTS, ...opts}
   const {target, update} = _opts
-  const snapshot: ISnapshot = await getExecSnapshot(_opts).then(normalizeSnapshot)
+  const execSnapshot: ISnapshot = await getExecSnapshot(_opts)
+  const snapshot: ISnapshot = normalizeSnapshot(execSnapshot, _opts)
 
   if (update) {
     await updateSnapshot(target, snapshot)
