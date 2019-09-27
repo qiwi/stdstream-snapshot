@@ -18,22 +18,20 @@ import {
   IErr,
 } from './interface'
 
+export const DEFAULT_CMD_OPTS: ICmdOpts = {cwd: process.cwd()}
+
 export const DEFAULT_OPTS = {
   trim: true,
   normalizeSpaces: true,
   normalizePaths: true,
   normalizeEncoding: true,
+  cmdOpts: DEFAULT_CMD_OPTS,
 }
-
-export const DEFAULT_CMD_OPTS: ICmdOpts = {cwd: process.cwd()}
-
-export const processCmdOpts = (opts: ICmdOpts = {}): ICmdOpts => ({...DEFAULT_CMD_OPTS, opts})
 
 export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Promise((resolve) => {
   const {cmd, cmdOpts} = opts
-  const _cmdOpts: any = processCmdOpts(cmdOpts)
 
-  exec(cmd, _cmdOpts, (_err: ExecException | null, _stdout: string | Buffer, _stderr: string | Buffer) => {
+  exec(cmd, cmdOpts as any, (_err: ExecException | null, _stdout: string | Buffer, _stderr: string | Buffer) => {
     const stdout = _stdout + ''
     const stderr = _stderr + ''
     const err: IErr = {
