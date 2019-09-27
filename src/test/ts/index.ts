@@ -1,9 +1,9 @@
 import {readFileSync} from 'fs'
-import {matchSnapshot} from '../../main/ts'
+import {generateSnapshot, matchSnapshot} from '../../main/ts'
 
-describe('process', () => {
+describe('stdstream-snapshot', () => {
   const target = 'src/test/snapshots/foo.json'
-  const dirname = __dirname
+  const dirname = process.cwd()
   const stdout = `
 \t${dirname}/rules/some-rules.ts
 \t\t2:7   error  'name' is assigned a value but never used                                 no-unused-vars
@@ -16,37 +16,58 @@ describe('process', () => {
     2:7   error  'name' is assigned a value but never used                                 no-unused-vars
     3:7   error  'name' is already defined                                                 no-redeclare`
 
-  it('updates snapshot data with new stdout', async() => {
-    const result = await matchSnapshot({
-      cmd,
-      target,
-      update: true,
-      cmdOpts: {cwd: dirname},
-    })
-    expect(result).toBeTruthy()
-    const {stdout, err} = JSON.parse(readFileSync(target, 'utf-8'))
+  describe('#generateSnapshot', () => {
+    it('returns a new snapshot', async() => {
+      const snapshot = await generateSnapshot({
+        cmd,
+      })
 
-    expect(stdout).toBe(normalizedStdout)
-    expect(err.code).toBe(1)
+      expect(snapshot).toMatchSnapshot()
+    })
   })
 
-  it('return true if new snapshot matches to the previous', async() => {
-    const result = await matchSnapshot({
-      cmd,
-      target,
-      cmdOpts: {cwd: dirname},
+  describe('#matchSnapshot', () => {
+
+    it('requires target option', () => {
+      return expect(matchSnapshot({
+        cmd,
+      }))
+        .rejects
+        .toEqual(new Error('stdstream-snapshot: matchSnapshot requires target'))
     })
 
-    expect(result).toBeTruthy()
-  })
+    it('updates snapshot data with new stdout', async() => {
+      const result = await matchSnapshot({
+        cmd,
+        target,
+        update: true,
+        cmdOpts: {cwd: dirname},
+      })
+      expect(result).toBeTruthy()
+      const {stdout, err} = JSON.parse(readFileSync(target, 'utf-8'))
 
-  it('return false otherwise', async() => {
-    const result = await matchSnapshot({
-      cmd: 'echo baz quux',
-      target,
-      cmdOpts: {cwd: dirname},
+      expect(stdout).toBe(normalizedStdout)
+      expect(err.code).toBe(1)
     })
 
-    expect(result).toBeFalsy()
+    it('return true if new snapshot matches to the previous', async() => {
+      const result = await matchSnapshot({
+        cmd,
+        target,
+        cmdOpts: {cwd: dirname},
+      })
+
+      expect(result).toBeTruthy()
+    })
+
+    it('return false otherwise', async() => {
+      const result = await matchSnapshot({
+        cmd: 'echo baz quux',
+        target,
+        cmdOpts: {cwd: dirname},
+      })
+
+      expect(result).toBeFalsy()
+    })
   })
 })

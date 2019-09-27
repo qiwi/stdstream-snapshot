@@ -25,7 +25,7 @@ export const DEFAULT_OPTS = {
   normalizeEncoding: true,
 }
 
-export const DEFAULT_CMD_OPTS: ICmdOpts = {cwd: __dirname}
+export const DEFAULT_CMD_OPTS: ICmdOpts = {cwd: process.cwd()}
 
 export const processCmdOpts = (opts: ICmdOpts = {}): ICmdOpts => ({...DEFAULT_CMD_OPTS, opts})
 
@@ -51,7 +51,7 @@ export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Pro
   })
 })
 
-export const getSnapshot = async(filePath: string): Promise<ISnapshot> => new Promise((resolve, reject) => {
+export const readSnapshot = async(filePath: string): Promise<ISnapshot> => new Promise((resolve, reject) => {
   readFile(filePath, 'utf8', (err, result) => {
     if (err) {
       reject(err)
@@ -61,6 +61,13 @@ export const getSnapshot = async(filePath: string): Promise<ISnapshot> => new Pr
     }
   })
 })
+
+export const generateSnapshot = async(opts: IOpts): Promise<ISnapshot> => {
+  const _opts: IOpts = {...DEFAULT_OPTS, ...opts}
+  const execSnapshot: ISnapshot = await getExecSnapshot(_opts)
+
+  return normalizeSnapshot(execSnapshot, _opts)
+}
 
 export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<any> => new Promise((resolve, reject) => {
   const text = JSON.stringify(snapshot)
@@ -76,7 +83,6 @@ export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<a
 })
 
 export const normalizeSnapshot = (snapshot: ISnapshot, opts: IOpts): ISnapshot => {
-  // const opts: IOpts = snapshot.opts
   const handlerMap: {[key: string]: IStringHandler} = {
     normalizePaths: relatify,
     normalizeEncoding: fixEncoding,
@@ -107,17 +113,20 @@ export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._o
 }
 
 export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
-  const _opts: IOpts = {...DEFAULT_OPTS, ...opts}
-  const {target, update} = _opts
-  const execSnapshot: ISnapshot = await getExecSnapshot(_opts)
-  const snapshot: ISnapshot = normalizeSnapshot(execSnapshot, _opts)
+  const {target, update} = opts
+
+  if (!target) {
+    throw new Error('stdstream-snapshot: matchSnapshot requires target')
+  }
+
+  const snapshot: ISnapshot = await generateSnapshot(opts)
 
   if (update) {
     await updateSnapshot(target, snapshot)
     return true
   }
 
-  const prevSnapshot = await getSnapshot(target)
+  const prevSnapshot = await readSnapshot(target)
 
   return match(snapshot, prevSnapshot)
 }
@@ -125,3 +134,4 @@ export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
 export const match = (prev: ISnapshot, next: ISnapshot): boolean =>
   prev.stdout === next.stdout
     && prev.stderr === next.stderr
+      && JSON.stringify(prev.err) === JSON.stringify(next.err)

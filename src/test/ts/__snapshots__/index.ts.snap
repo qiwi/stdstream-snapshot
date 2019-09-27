@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stdstream-snapshot #generateSnapshot returns a new snapshot 1`] = `
+Object {
+  "err": Object {
+    "code": 1,
+    "killed": false,
+    "signal": null,
+  },
+  "stderr": "",
+  "stdout": "/Users/antongolub/projects/stdstream-snapshot/rules/some-rules.ts
+    2:7   error  'name' is assigned a value but never used                                 no-unused-vars
+    3:7   error  'name' is already defined                                                 no-redeclare",
+}
+`;

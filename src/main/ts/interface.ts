@@ -6,7 +6,7 @@ export type ICmdOpts = IAnyMap
 
 export type IOpts = {
   cmd: string
-  target: string
+  target?: string
   cmdOpts?: ICmdOpts,
   update?: boolean,
   normalizePaths?: boolean,

@@ -14,18 +14,33 @@ npm add stdstream-snapshot -D
 ```
 
 ## Usage
+For [Jest](https://jestjs.io/):
+```javascript
+import {generateSnapshot} from 'stdstream-snapshot'
+
+it('cmd output matches to snapshot', async () => {
+  const cmd = 'somecmd --flag=foo -b'
+  const result = await generateSnapshot({
+    cmd,
+  })
+
+  expect(result).toMatchSnapshot()
+})
+```
+
+[Jasmine](https://jasmine.github.io/) or similar with no built-it snapshot API.
 ```javascript
 import {matchSnapshot} from 'stdstream-snapshot'
 
-it('cmd output matches to spapshot', async () => {
+it('cmd output matches to snapshot', async () => {
   const cmd = 'somecmd --flag=foo -b'
   const target = './test/snapshots/some-cmd-output.json'
   const result = await matchSnapshot({
     cmd,
     target,
-    update: true
+    update: !!process.env.UPDATE_SNAPSHOT
   })
 
-  expect(result).toBeTruthy()
+  expect(result).toBe(true)
 })
 ```

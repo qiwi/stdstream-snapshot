@@ -1,7 +1,5 @@
 import {
   relatify,
-  // relatify,
-  // fixEncoding,
   tabsToSpaces,
   trim,
 } from '../../main/ts/handler'
