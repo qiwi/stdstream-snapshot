@@ -13,6 +13,19 @@ yarn add stdstream-snapshot -D
 npm add stdstream-snapshot -D
 ```
 
+## Snapshot
+```json
+{
+  "stderr": "",
+  "stdout": "/rules/some-rules.ts\n    2:7   error  'name'...",
+  "err": {
+    "signal": null,
+    "code": 1,
+    "killed": false
+  }
+}
+```
+
 ## Usage
 With [Jest](https://jestjs.io/):
 ```javascript
@@ -45,15 +58,12 @@ it('cmd output matches to snapshot', async () => {
 })
 ```
 
-## Snapshot
-```json
-{
-  "stderr": "",
-  "stdout": "/rules/some-rules.ts\n    2:7   error  'name'...",
-  "err": {
-    "signal": null,
-    "code": 1,
-    "killed": false
-  }
-}
-```
+## Options
+There're several normalization steps supported out of box.
+
+| Option              | Description | Default |
+|---------------------|-------------|---------|
+| `trim`              | Removes redundant spaces from both ends of a strings | true |
+| `normalizePaths`    | Replaces `process.cwd()` prefix from any found paths in the output strings | true |
+| `normalizeSpaces`   | Converts tabs to double spaces | true |
+| `normalizeEncoding` | Replaces output rubbish like `[8m [10m` | true |
