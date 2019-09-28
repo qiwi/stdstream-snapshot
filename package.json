@@ -1,6 +1,6 @@
 {
   "name": "stdstream-snapshot",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": false,
   "description": "Util for CLI testing: fetch stdout, stderr streams and match data to snapshot",
   "source": "src/main/ts/index.ts",

@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.0...v1.2.1) (2019-09-28)
+
+
+### Performance Improvements
+
+* **package:** minor improvements, up dev deps & repack ([44003e0](https://github.com/qiwi/stdstream-snapshot/commit/44003e0))
+
 # [1.2.0](https://github.com/qiwi/stdstream-snapshot/compare/v1.1.1...v1.2.0) (2019-09-27)
 
 
