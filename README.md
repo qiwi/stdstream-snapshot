@@ -5,7 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/5770053f57f0656df4ea/maintainability)](https://codeclimate.com/github/qiwi/stdstream-snapshot/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5770053f57f0656df4ea/test_coverage)](https://codeclimate.com/github/qiwi/stdstream-snapshot/test_coverage)
 
-Tiny util for CLI testing: fetch stdout, stderr streams and match data to snapshot
+Util for CLI testing: fetch stdout, stderr streams and match its data to snapshot
 
 ## Install
 ```bash
@@ -63,7 +63,7 @@ There're several normalization steps supported out of box.
 
 | Option              | Description | Default |
 |---------------------|-------------|---------|
-| `trim`              | Removes redundant spaces from both ends of a strings | true |
+| `trim`              | Removes redundant spaces from both ends of strings | true |
 | `normalizePaths`    | Replaces `process.cwd()` prefix from any found paths in the output strings | true |
 | `normalizeSpaces`   | Converts tabs to double spaces | true |
 | `normalizeEncoding` | Replaces output rubbish like `[8m [10m` | true |

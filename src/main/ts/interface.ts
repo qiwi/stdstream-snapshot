@@ -9,7 +9,7 @@ export type IOpts = {
   target?: string
   cmdOpts?: ICmdOpts,
   update?: boolean,
-  normalizeSpaces: boolean,
+  normalizeSpaces?: boolean,
   normalizePaths?: boolean,
   normalizeEncoding?: boolean,
   trim?: boolean,
