@@ -42,8 +42,8 @@
   },
   "dependencies": {
     "@qiwi/substrate": "^1.11.2",
-    "tslib": "^1.10.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@qiwi/semantic-release-gh-pages-plugin": "^1.10.6",
@@ -81,7 +81,8 @@
     "verifyConditions": [
       "@semantic-release/changelog",
       "@semantic-release/npm",
-      "@semantic-release/git"
+      "@semantic-release/git",
+      "@qiwi/semantic-release-gh-pages-plugin"
     ],
     "prepare": [
       "@semantic-release/changelog",
@@ -90,7 +91,8 @@
     ],
     "publish": [
       "@semantic-release/npm",
-      "@semantic-release/github"
+      "@semantic-release/github",
+      "@qiwi/semantic-release-gh-pages-plugin"
     ]
   },
   "repository": {
