@@ -14,7 +14,7 @@ npm add stdstream-snapshot -D
 ```
 
 ## Usage
-For [Jest](https://jestjs.io/):
+With [Jest](https://jestjs.io/):
 ```javascript
 import {generateSnapshot} from 'stdstream-snapshot'
 
@@ -28,7 +28,7 @@ it('cmd output matches to snapshot', async () => {
 })
 ```
 
-[Jasmine](https://jasmine.github.io/) or similar with no built-it snapshot API.
+With [Jasmine](https://jasmine.github.io/) or another one test framework with no built-it snapshot API:
 ```javascript
 import {matchSnapshot} from 'stdstream-snapshot'
 
@@ -43,4 +43,17 @@ it('cmd output matches to snapshot', async () => {
 
   expect(result).toBe(true)
 })
+```
+
+## Snapshot
+```json
+{
+  "stderr": "",
+  "stdout": "/rules/some-rules.ts\n    2:7   error  'name'...",
+  "err": {
+    "signal": null,
+    "code": 1,
+    "killed": false
+  }
+}
 ```
