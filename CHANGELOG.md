@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.1...v1.2.2) (2019-09-29)
+
+
+### Bug Fixes
+
+* **index:** export lib ifaces ([711d9ee](https://github.com/qiwi/stdstream-snapshot/commit/711d9ee))
+
 ## [1.2.1](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.0...v1.2.1) (2019-09-28)
 
 
