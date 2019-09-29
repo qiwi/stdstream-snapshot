@@ -67,7 +67,7 @@
     "rimraf": "^3.0.0",
     "semantic-release": "^15.13.24",
     "stdout-stderr": "^0.1.9",
-    "terser": "^4.3.3",
+    "terser": "^4.3.4",
     "ts-jest": "^24.1.0",
     "tslint": "^5.20.0",
     "tslint-config-qiwi": "^1.1.2",
