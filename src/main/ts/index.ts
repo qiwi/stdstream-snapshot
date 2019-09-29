@@ -1,3 +1,5 @@
+/** @module stdstream-snapshot */
+
 // TODO use execa
 import {exec, ExecException} from 'child_process'
 import {writeFile, readFile} from 'fs'
@@ -18,8 +20,14 @@ import {
   IErr,
 } from './interface'
 
+/**
+ * @ignore
+ */
 export const DEFAULT_CMD_OPTS: ICmdOpts = {cwd: process.cwd()}
 
+/**
+ * Default options.
+ */
 export const DEFAULT_OPTS = {
   trim: true,
   normalizeSpaces: true,
@@ -28,6 +36,11 @@ export const DEFAULT_OPTS = {
   cmdOpts: DEFAULT_CMD_OPTS,
 }
 
+/**
+ * Executes the cmd and returns std stream data as a result.
+ * @param {IOpts} opts
+ * @return {Promise<ISnapshot>} snapshot
+ */
 export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Promise((resolve) => {
   const {cmd, cmdOpts} = opts
 
@@ -49,6 +62,12 @@ export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Pro
   })
 })
 
+/**
+ * Reads the snapshot from file.
+ * @ignore
+ * @param {string} filePath
+ * @return {ISnapshot} snapshot
+ */
 export const readSnapshot = async(filePath: string): Promise<ISnapshot> => new Promise((resolve, reject) => {
   readFile(filePath, 'utf8', (err, result) => {
     if (err) {
@@ -60,6 +79,11 @@ export const readSnapshot = async(filePath: string): Promise<ISnapshot> => new P
   })
 })
 
+/**
+ * Executes the cmd and returns normalized std stream data as a result.
+ * @param {IOpts} opts
+ * @return {Promise<ISnapshot>} snapshot
+ */
 export const generateSnapshot = async(opts: IOpts): Promise<ISnapshot> => {
   const _opts: IOpts = {...DEFAULT_OPTS, ...opts}
   const execSnapshot: ISnapshot = await getExecSnapshot(_opts)
@@ -67,6 +91,12 @@ export const generateSnapshot = async(opts: IOpts): Promise<ISnapshot> => {
   return normalizeSnapshot(execSnapshot, _opts)
 }
 
+/**
+ * Writes snapshot data to a file.
+ * @ignore
+ * @param {string} filePath
+ * @param {ISnapshot} snapshot
+ */
 export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<any> => new Promise((resolve, reject) => {
   const text = JSON.stringify(snapshot)
 
@@ -80,6 +110,12 @@ export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<a
   })
 })
 
+/**
+ * Normalized snapshot data.
+ * @ignore
+ * @param {ISnapshot} snapshot
+ * @param {IOpts} opts
+ */
 export const normalizeSnapshot = (snapshot: ISnapshot, opts: IOpts): ISnapshot => {
   const handlerMap: {[key: string]: IStringHandler} = {
     normalizePaths: relatify,
@@ -100,6 +136,13 @@ export const normalizeSnapshot = (snapshot: ISnapshot, opts: IOpts): ISnapshot =
   }, snapshot)
 }
 
+/**
+ * Applies StringHandler to snapshot.
+ * @ignore
+ * @param handler
+ * @param snapshot
+ * @param _opts
+ */
 export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._opts: any[]) => {
   const {stdout, stderr, err} = snapshot
 
@@ -110,6 +153,11 @@ export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._o
   }
 }
 
+/**
+ * Executes cmd and matches its stdout/stderr to the previous snapshot.
+ * @param {IOpts} opts
+ * @return {Promise<Boolean>} result
+ */
 export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
   const {target, update} = opts
 
@@ -129,6 +177,12 @@ export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
   return match(snapshot, prevSnapshot)
 }
 
+/**
+ * Snapshot matcher.
+ * @ignore
+ * @param {ISnapshot} prev
+ * @param {ISnapshot} next
+ */
 export const match = (prev: ISnapshot, next: ISnapshot): boolean =>
   prev.stdout === next.stdout
     && prev.stderr === next.stderr
