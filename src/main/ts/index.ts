@@ -20,6 +20,8 @@ import {
   IErr,
 } from './interface'
 
+export * from './interface'
+
 /**
  * @ignore
  */
