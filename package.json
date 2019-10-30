@@ -65,7 +65,7 @@
     "microbundle": "^0.12.0-next.3",
     "replace-in-file": "^4.2.0",
     "rimraf": "^3.0.0",
-    "semantic-release": "^15.13.18",
+    "semantic-release": "^15.13.28",
     "stdout-stderr": "^0.1.9",
     "terser": "^4.3.9",
     "ts-jest": "^24.1.0",
@@ -94,7 +94,7 @@
       "@semantic-release/github",
       {
         "path": "@qiwi/semantic-release-gh-pages-plugin",
-        "msg": "updated"
+        "msg": "doc upd {{=it.nextRelease.gitTag}"
       }
     ]
   },
