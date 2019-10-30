@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.3...v1.2.4) (2019-10-30)
+
+
+### Performance Improvements
+
+* tech release ([6f2da47](https://github.com/qiwi/stdstream-snapshot/commit/6f2da47))
+
 ## [1.2.3](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.2...v1.2.3) (2019-10-30)
 
 
