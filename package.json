@@ -43,7 +43,7 @@
   "dependencies": {
     "@qiwi/substrate": "^1.16.2",
     "lodash": "^4.17.15",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@qiwi/semantic-release-gh-pages-plugin": "^1.11.2",
