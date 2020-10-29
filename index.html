@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>stdstream-snapshot</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for stdstream-snapshot">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> stdstream-snapshot</h1>
+			<h1>stdstream-snapshot</h1>
 		</div>
 	</div>
 </header>
@@ -66,10 +66,10 @@
 					<h1>stdstream-snapshot</h1>
 				</a>
 				<p><a href="https://travis-ci.com/qiwi/stdstream-snapshot"><img src="https://travis-ci.com/qiwi/stdstream-snapshot.svg?branch=master" alt="Build Status"></a>
-					<a href="https://www.npmjs.com/package/stdstream-snapshot"><img src="https://img.shields.io/npm/v/stdstream-snapshot/latest.svg" alt="npm (tag)"></a>
 					<a href="https://david-dm.org/qiwi/stdstream-snapshot"><img src="https://img.shields.io/david/qiwi/stdstream-snapshot.svg?maxAge=300" alt="dependencyStatus"></a>
 					<a href="https://codeclimate.com/github/qiwi/stdstream-snapshot/maintainability"><img src="https://api.codeclimate.com/v1/badges/5770053f57f0656df4ea/maintainability" alt="Maintainability"></a>
-				<a href="https://codeclimate.com/github/qiwi/stdstream-snapshot/test_coverage"><img src="https://api.codeclimate.com/v1/badges/5770053f57f0656df4ea/test_coverage" alt="Test Coverage"></a></p>
+					<a href="https://codeclimate.com/github/qiwi/stdstream-snapshot/test_coverage"><img src="https://api.codeclimate.com/v1/badges/5770053f57f0656df4ea/test_coverage" alt="Test Coverage"></a>
+				<a href="https://www.npmjs.com/package/stdstream-snapshot"><img src="https://img.shields.io/npm/v/stdstream-snapshot/latest.svg" alt="npm (tag)"></a></p>
 				<p>Util for CLI testing: fetch stdout, stderr streams and match its data to snapshot</p>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h2>Install</h2>
@@ -80,22 +80,22 @@ npm add stdstream-snapshot -D</code></pre>
 					<h2>Snapshot</h2>
 				</a>
 				<pre><code class="language-json">{
-  <span class="hljs-attr">"stderr"</span>: <span class="hljs-string">""</span>,
-  <span class="hljs-attr">"stdout"</span>: <span class="hljs-string">"/rules/some-rules.ts\n    2:7   error  'name'..."</span>,
-  <span class="hljs-attr">"err"</span>: {
-    <span class="hljs-attr">"signal"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"code"</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-attr">"killed"</span>: <span class="hljs-literal">false</span>
+  <span class="hljs-attr">&quot;stderr&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+  <span class="hljs-attr">&quot;stdout&quot;</span>: <span class="hljs-string">&quot;/rules/some-rules.ts\n    2:7   error  &#x27;name&#x27;...&quot;</span>,
+  <span class="hljs-attr">&quot;err&quot;</span>: {
+    <span class="hljs-attr">&quot;signal&quot;</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">&quot;code&quot;</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">&quot;killed&quot;</span>: <span class="hljs-literal">false</span>
   }
 }</code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
 				<p>With <a href="https://jestjs.io/">Jest</a>:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {generateSnapshot} <span class="hljs-keyword">from</span> <span class="hljs-string">'stdstream-snapshot'</span>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {generateSnapshot} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;stdstream-snapshot&#x27;</span>
 
-it(<span class="hljs-string">'cmd output matches to snapshot'</span>, <span class="hljs-keyword">async</span> () =&gt; {
-  <span class="hljs-keyword">const</span> cmd = <span class="hljs-string">'somecmd --flag=foo -b'</span>
+it(<span class="hljs-string">&#x27;cmd output matches to snapshot&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> cmd = <span class="hljs-string">&#x27;somecmd --flag=foo -b&#x27;</span>
   <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> generateSnapshot({
     cmd,
   })
@@ -103,11 +103,11 @@ it(<span class="hljs-string">'cmd output matches to snapshot'</span>, <span clas
   expect(result).toMatchSnapshot()
 })</code></pre>
 				<p>With <a href="https://jasmine.github.io/">Jasmine</a> or another one test framework with no built-it snapshot API:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {matchSnapshot} <span class="hljs-keyword">from</span> <span class="hljs-string">'stdstream-snapshot'</span>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {matchSnapshot} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;stdstream-snapshot&#x27;</span>
 
-it(<span class="hljs-string">'cmd output matches to snapshot'</span>, <span class="hljs-keyword">async</span> () =&gt; {
-  <span class="hljs-keyword">const</span> cmd = <span class="hljs-string">'somecmd --flag=foo -b'</span>
-  <span class="hljs-keyword">const</span> target = <span class="hljs-string">'./test/snapshots/some-cmd-output.json'</span>
+it(<span class="hljs-string">&#x27;cmd output matches to snapshot&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> cmd = <span class="hljs-string">&#x27;somecmd --flag=foo -b&#x27;</span>
+  <span class="hljs-keyword">const</span> target = <span class="hljs-string">&#x27;./test/snapshots/some-cmd-output.json&#x27;</span>
   <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> matchSnapshot({
     cmd,
     target,
@@ -157,17 +157,8 @@ it(<span class="hljs-string">'cmd output matches to snapshot'</span>, <span clas
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_handler_.html">"handler"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_interface_.html">"interface"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_util_.html">"util"</a>
+					<li class=" tsd-kind-module tsd-is-not-exported">
+						<a href="modules/reflection-99.html">&lt;em&gt;<wbr>Module&lt;/em&gt;</a>
 					</li>
 				</ul>
 			</nav>
@@ -182,64 +173,10 @@ it(<span class="hljs-string">'cmd output matches to snapshot'</span>, <span clas
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
 		</div>
 	</div>
 </footer>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
