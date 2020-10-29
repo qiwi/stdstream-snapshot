@@ -2,23 +2,23 @@
 
 // TODO use execa
 import {exec, ExecException} from 'child_process'
-import {writeFile, readFile} from 'fs'
-import {identity, get, pick} from './util'
-import {
-  trim,
-  tabsToSpaces,
-  relatify,
-  fixEncoding,
-} from './handler'
+import {readFile,writeFile} from 'fs'
 
 import {
+  fixEncoding,
+  relatify,
+  tabsToSpaces,
+  trim,
+} from './handler'
+import {
   IAnyMap,
-  IOpts,
   ICmdOpts,
+  IErr,
+  IOpts,
   ISnapshot,
   IStringHandler,
-  IErr,
 } from './interface'
+import {get, identity, pick} from './util'
 
 export * from './interface'
 
@@ -43,14 +43,14 @@ export const DEFAULT_OPTS = {
  * @param {IOpts} opts
  * @return {Promise<ISnapshot>} snapshot
  */
-export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Promise((resolve) => {
+export const getExecSnapshot = async (opts: IOpts): Promise<ISnapshot> => new Promise((resolve) => {
   const {cmd, cmdOpts} = opts
 
   exec(cmd, cmdOpts as any, (_err: ExecException | null, _stdout: string | Buffer, _stderr: string | Buffer) => {
     const stdout = _stdout + ''
     const stderr = _stderr + ''
     const err: IErr = {
-      signal: null,
+      signal: null, // eslint-disable-line
       code: 0,
       killed: false,
       ...pick(_err, 'signal', 'code', 'killed'),
@@ -70,12 +70,11 @@ export const getExecSnapshot = async(opts: IOpts): Promise<ISnapshot> => new Pro
  * @param {string} filePath
  * @return {ISnapshot} snapshot
  */
-export const readSnapshot = async(filePath: string): Promise<ISnapshot> => new Promise((resolve, reject) => {
+export const readSnapshot = async (filePath: string): Promise<ISnapshot> => new Promise((resolve, reject) => {
   readFile(filePath, 'utf8', (err, result) => {
     if (err) {
       reject(err)
-    }
-    else {
+    } else {
       resolve(JSON.parse(result) as ISnapshot)
     }
   })
@@ -86,7 +85,7 @@ export const readSnapshot = async(filePath: string): Promise<ISnapshot> => new P
  * @param {IOpts} opts
  * @return {Promise<ISnapshot>} snapshot
  */
-export const generateSnapshot = async(opts: IOpts): Promise<ISnapshot> => {
+export const generateSnapshot = async (opts: IOpts): Promise<ISnapshot> => {
   const _opts: IOpts = {...DEFAULT_OPTS, ...opts}
   const execSnapshot: ISnapshot = await getExecSnapshot(_opts)
 
@@ -105,8 +104,7 @@ export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<a
   writeFile(filePath, text, (err) => {
     if (err) {
       reject(err)
-    }
-    else {
+    } else {
       resolve(text)
     }
   })
@@ -119,7 +117,7 @@ export const updateSnapshot = (filePath: string, snapshot: ISnapshot): Promise<a
  * @param {IOpts} opts
  */
 export const normalizeSnapshot = (snapshot: ISnapshot, opts: IOpts): ISnapshot => {
-  const handlerMap: {[key: string]: IStringHandler} = {
+  const handlerMap: { [key: string]: IStringHandler } = {
     normalizePaths: relatify,
     normalizeEncoding: fixEncoding,
     normalizeSpaces: tabsToSpaces,
@@ -145,7 +143,7 @@ export const normalizeSnapshot = (snapshot: ISnapshot, opts: IOpts): ISnapshot =
  * @param snapshot
  * @param _opts
  */
-export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._opts: any[]) => {
+export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._opts: any[]): ISnapshot => {
   const {stdout, stderr, err} = snapshot
 
   return {
@@ -160,7 +158,7 @@ export const applyHandler = (handler: IStringHandler, snapshot: ISnapshot, ..._o
  * @param {IOpts} opts
  * @return {Promise<Boolean>} result
  */
-export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
+export const matchSnapshot = async (opts: IOpts): Promise<boolean> => {
   const {target, update} = opts
 
   if (!target) {
@@ -187,5 +185,5 @@ export const matchSnapshot = async(opts: IOpts): Promise<boolean> => {
  */
 export const match = (prev: ISnapshot, next: ISnapshot): boolean =>
   prev.stdout === next.stdout
-    && prev.stderr === next.stderr
-      && JSON.stringify(prev.err) === JSON.stringify(next.err)
+  && prev.stderr === next.stderr
+  && JSON.stringify(prev.err) === JSON.stringify(next.err)

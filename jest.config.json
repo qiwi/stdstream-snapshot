@@ -8,8 +8,7 @@
     "<rootDir>/src/main/ts/**/*.ts"
   ],
   "testMatch": [
-    "<rootDir>/src/test/ts/**/*.ts",
-    "<rootDir>/src/test/js/**/*.js"
+    "<rootDir>/src/test/ts/**/*.ts"
   ],
   "testPathIgnorePatterns": [
     "/node_modules/",
@@ -28,7 +27,7 @@
   },
   "globals": {
     "ts-jest": {
-      "tsConfig": "tsconfig.test.json"
+      "tsconfig": "tsconfig.test.json"
     }
   }
 }
