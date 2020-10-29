@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.4...v1.2.5) (2020-10-29)
+
+
+### Performance Improvements
+
+* **package:** up deps, fix vuls ([ee62988](https://github.com/qiwi/stdstream-snapshot/commit/ee62988bc91703558bedd5e1fd56d4b9312bc3bd))
+
 ## [1.2.4](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.3...v1.2.4) (2019-10-30)
 
 
