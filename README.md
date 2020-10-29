@@ -1,9 +1,9 @@
 # stdstream-snapshot
 [![Build Status](https://travis-ci.com/qiwi/stdstream-snapshot.svg?branch=master)](https://travis-ci.com/qiwi/stdstream-snapshot)
-[![npm (tag)](https://img.shields.io/npm/v/stdstream-snapshot/latest.svg)](https://www.npmjs.com/package/stdstream-snapshot)
 [![dependencyStatus](https://img.shields.io/david/qiwi/stdstream-snapshot.svg?maxAge=300)](https://david-dm.org/qiwi/stdstream-snapshot)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5770053f57f0656df4ea/maintainability)](https://codeclimate.com/github/qiwi/stdstream-snapshot/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5770053f57f0656df4ea/test_coverage)](https://codeclimate.com/github/qiwi/stdstream-snapshot/test_coverage)
+[![npm (tag)](https://img.shields.io/npm/v/stdstream-snapshot/latest.svg)](https://www.npmjs.com/package/stdstream-snapshot)
 
 Util for CLI testing: fetch stdout, stderr streams and match its data to snapshot
 

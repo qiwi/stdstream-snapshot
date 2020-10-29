@@ -5,7 +5,7 @@ import {IStringHandler} from './interface'
  * @ignore
  */
 export const relatify: IStringHandler = (out: string, dirname: string) => {
-  let index: number = 0
+  let index = 0
   const getIndex = () => {
     index = out.indexOf(dirname)
     return index

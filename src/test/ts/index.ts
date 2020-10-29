@@ -1,4 +1,5 @@
 import {readFileSync} from 'fs'
+
 import {generateSnapshot, matchSnapshot} from '../../main/ts'
 
 describe('stdstream-snapshot', () => {
