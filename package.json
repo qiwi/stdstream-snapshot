@@ -43,7 +43,7 @@
     "tslib": "^2.0.3"
   },
   "devDependencies": {
-    "@qiwi/libdefkit": "^2.1.4",
+    "@qiwi/libdefkit": "^3.0.0",
     "@types/bluebird": "^3.5.33",
     "@types/jest": "^26.0.15",
     "@types/node": "^14.14.6",
