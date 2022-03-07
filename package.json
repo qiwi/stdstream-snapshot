@@ -51,7 +51,7 @@
     "@types/lodash": "^4.14.163",
     "bluebird": "^3.7.2",
     "coveralls": "^3.1.0",
-    "eslint": "^7.12.1",
+    "eslint": "^8.0.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-config-qiwi": "^1.9.0",
     "jest": "^26.6.1",
