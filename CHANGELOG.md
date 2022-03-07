@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.5...v1.2.6) (2022-03-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency lodash to v4.17.21 [security] ([d27868a](https://github.com/qiwi/stdstream-snapshot/commit/d27868ab73532818d2dc3b4cdcd6eb498ff489cf))
+
 ## [1.2.5](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.4...v1.2.5) (2020-10-29)
 
 
