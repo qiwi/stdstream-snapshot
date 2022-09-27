@@ -23,11 +23,8 @@
     "node"
   ],
   "transform": {
-    "^.+\\.(ts|tsx)$": "ts-jest"
-  },
-  "globals": {
-    "ts-jest": {
+    "^.+\\.(ts|tsx)$": ["ts-jest", {
       "tsconfig": "tsconfig.test.json"
-    }
+    }]
   }
 }

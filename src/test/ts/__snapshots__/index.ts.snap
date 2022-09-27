@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`stdstream-snapshot #generateSnapshot returns a new snapshot 1`] = `
-Object {
-  "err": Object {
+{
+  "err": {
     "code": 1,
     "killed": false,
     "signal": null,
