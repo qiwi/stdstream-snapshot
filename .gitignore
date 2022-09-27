@@ -15,6 +15,7 @@ pids
 flow-coverage
 lib-cov
 coverage
+coverage.*
 .nyc_output
 
 # Bundle
@@ -36,6 +37,7 @@ flow-typed/npm/
 .eslintcache
 .node_repl_history
 .env
+.npmrc
 
 # IDE
 .idea
@@ -57,3 +59,14 @@ buildcache
 .rts2_cache_cjs
 .rts2_cache_es
 .rts2_cache_umd
+
+# Creds
+*.asc
+*.pem
+*.key
+
+# Codeclimate
+codeclimate
+codeclimate.*
+cc-reporter
+cc-reporter.*
