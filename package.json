@@ -1,7 +1,7 @@
 {
   "name": "@qiwi/stdstream-snapshot",
   "alias": "stdstream-snapshot",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Util for CLI testing: fetch stdout, stderr streams and match data to snapshot",
   "source": "src/main/ts/index.ts",
   "main": "target/bundle/stdstream-snapshot.js",

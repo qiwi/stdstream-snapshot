@@ -1,3 +1,8 @@
+## [1.2.7](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.6...v1.2.7) (2022-09-28)
+
+### Fixes & improvements
+* perf: up deps, fix some vuls ([bd08f24](https://github.com/qiwi/stdstream-snapshot/commit/bd08f2415e24af97bfa2a530c21a671323c097fb))
+
 ## [1.2.6](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.5...v1.2.6) (2022-03-07)
 
 
