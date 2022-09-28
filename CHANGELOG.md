@@ -1,3 +1,8 @@
+## [1.2.8](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.7...v1.2.8) (2022-09-28)
+
+### Fixes & improvements
+* docs: formatting ([6f6379e](https://github.com/qiwi/stdstream-snapshot/commit/6f6379e952d23326a7a06fdeb17b30ff020c847b))
+
 ## [1.2.7](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.6...v1.2.7) (2022-09-28)
 
 ### Fixes & improvements
