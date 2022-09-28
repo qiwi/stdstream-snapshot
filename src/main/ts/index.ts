@@ -1,6 +1,5 @@
 /** @module stdstream-snapshot */
 
-// TODO use execa
 import {exec, ExecException} from 'child_process'
 import {readFile,writeFile} from 'fs'
 
