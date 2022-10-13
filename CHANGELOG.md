@@ -1,3 +1,8 @@
+## [1.2.9](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.8...v1.2.9) (2022-10-13)
+
+### Fixes & improvements
+* fix: add pkg exports field ([dde9f25](https://github.com/qiwi/stdstream-snapshot/commit/dde9f256f390c92720cc9c48bfc78e84167b358d))
+
 ## [1.2.8](https://github.com/qiwi/stdstream-snapshot/compare/v1.2.7...v1.2.8) (2022-09-28)
 
 ### Fixes & improvements
